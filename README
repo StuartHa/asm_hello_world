@@ -1,0 +1,3 @@
+Prints "Hello world!" using the x86-32 and x86-64 versions of the "sys_write" system call.
+
+Interesting point: If you compile this as 64-bit program, the 32-bit system call will fail when passed stack memory. This is because the stack memory is at the top of the memory and outside of 32-bit memory, so it's treated as an invalid address.
