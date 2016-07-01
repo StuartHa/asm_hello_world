@@ -41,8 +41,12 @@ int main() {
   printf("Printing data allocated string\n");
   s_print_string(s_hello_world_buf, buf_len);
 
+  /* Interesting point: If you compile this as 64-bit program, the 32-bit
+     system call will fail when passed stack memory. This is because the 
+     stack memory is at the top of the memory and outside of 32-bit memory,
+     so it's treated as an invalid address. */
   printf("Printing stack allocated string\n");
   char stack_buf[buf_len];
   strcpy(stack_buf, s_hello_world_buf);
-  s_print_string(stack_buf, buf_len); // Returns error EFAULT (bad address).
+  s_print_string(stack_buf, buf_len);
 }
